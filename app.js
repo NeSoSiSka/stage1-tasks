@@ -1,13 +1,14 @@
+
 function makeFullscreen() {
     let elem = document.documentElement;
     if (!document.fullscreenElement) {
         elem.requestFullscreen()
     } 
     else {
-        document.exitFullscreen()
+            document.exitFullscreen()
     }
 }
-window.addEventListener('Cod', function(main) {
+window.addEventListener('keydown', function(main) {
     playSound(main.code)
 
 });
@@ -16,29 +17,29 @@ function playSound(keyId) {
     const audio = document.querySelector(`audio[data-code="${keyId}"]`)
     const key = document.querySelector(`.piano-key[data-code="${keyId}"]`)
     audio.currentTime = 0;
-    audio.play()
+    audio.play();
     key.classList.add('piano-key-active')
 }
 
 function removeTransition(main) {
     if (main.propertyName !== 'transform')
-        return
-    this.classList.remove('piano-key-active')
+        return;
+    this.classList.remove('piano-key-active');
 
 }
 
-const piano = document.querySelectorAll('.piano-key')
-piano.forEach(key => key.addEventListener('transitionend', removeTransition))
+const piano = document.querySelectorAll('.piano-key');
+piano.forEach(key => key.addEventListener('transitionend', removeTransition));
 
-const kC = document.getElementsByClassName("piano-key")
+const keyDivs = document.getElementsByClassName("piano-key");
 
-const Push = function(main) {
-    const keyId = this.getAttribute("data-code")
-    playSound(keyId)
+const PushClick = function(main) {
+    const keyId = this.getAttribute("data-code");
+    playSound(keyId);
 };
 
-for (let i = 0; i < kC.length; i++) {
-    kC[i].addEventListener('mousedown', Push)
+for (let i = 0; i < keyDivs.length; i++) {
+    keyDivs[i].addEventListener('mousedown', PushClick);
 }
 
 
@@ -49,5 +50,5 @@ function switchCode() {
     }
 }
 document.querySelectorAll(".btn-container").forEach(btn => btn.addEventListener("click", function() {
-    switchCode(this)
+    switchCode(this);
 }));
